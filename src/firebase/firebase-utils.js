@@ -20,7 +20,32 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 // ------------------------------------------------------
 
-// below code is what you config with google auth
+// pull authentication of data into firebase of Database Method---------
+export const createUserProfileDucoment = async (authUser, additionalData) => {
+    if (!authUser) return;
+    const userRef = await firestore.doc(`users/${authUser.uid}`);
+    const userSnapShop = await userRef.get();
+    // console.log(userSnapShop);
+
+    if (!userSnapShop.exists) {
+        const { displayName, email } = authUser;
+        const createdAt = new Date(); // the time that has been created for timing data
+
+        try {
+            await userRef.set({
+                displayName,
+                email,
+                createdAt,
+                ...additionalData
+            });
+        } catch (error) {
+            console.log("error for creating user in database: ", error.message);
+        }
+    }
+    return userRef;
+};
+
+// below code is what you config with google auth-----------
 
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
