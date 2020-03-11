@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom"; //add Redirect to prevent customer still can access sign-page when they have been sign in
 import { connect } from "react-redux";
 
 import "./App.css";
@@ -54,12 +54,26 @@ class App extends React.Component {
                 <Switch>
                     <Route exact path="/" component={HomePage} />
                     <Route path="/shop" component={ShopPage} />
-                    <Route path="/signin" component={SignInOutPage} />
+                    <Route
+                        exact
+                        path="/signin"
+                        render={() =>
+                            this.props.currentUser ? (
+                                <Redirect to="/" />
+                            ) : (
+                                <SignInOutPage />
+                            )
+                        }
+                    />
                 </Switch>
             </div>
         );
     }
 }
+
+const mapStateToProps = ({ user }) => ({
+    currentUser: user.currentUser
+});
 
 const mapDispatchToProps = dispatch => ({
     // dispatch props of property name (name it what erver you want)
@@ -68,4 +82,4 @@ const mapDispatchToProps = dispatch => ({
     setCurrentUser: user => dispatch(setCurrentUser(user))
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
