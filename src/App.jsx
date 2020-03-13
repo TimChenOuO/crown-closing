@@ -9,12 +9,14 @@ import HomePage from "./pages/homepage/Homepage";
 import ShopPage from "./pages/shoppage/ShopPage";
 import SignInOutPage from "./pages/sign-in-out-page/Sign-in-out-page";
 import Header from "./components/header/Header";
+import CheckOutPage from "./pages/checkout-page/Checkout-page";
 
-// firebase method
+// firebase method´
 import { auth, createUserProfileDucoment } from "./firebase/firebase-utils";
 
 // Redux
 import { setCurrentUser } from "./redux/user/user-action.js";
+import { selectCurrentUser } from "./redux/user/user--selector";
 
 class App extends React.Component {
     unSubscribeFromAuth = null;
@@ -54,6 +56,7 @@ class App extends React.Component {
                 <Switch>
                     <Route exact path="/" component={HomePage} />
                     <Route path="/shop" component={ShopPage} />
+                    <Route exact path="/checkout" component={CheckOutPage} />
                     <Route
                         exact
                         path="/signin"
@@ -71,8 +74,8 @@ class App extends React.Component {
     }
 }
 
-const mapStateToProps = ({ user }) => ({
-    currentUser: user.currentUser
+const mapStateToProps = state => ({
+    currentUser: selectCurrentUser(state)
 });
 
 const mapDispatchToProps = dispatch => ({
