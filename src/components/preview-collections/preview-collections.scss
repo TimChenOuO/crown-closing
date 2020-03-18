@@ -1,23 +1,23 @@
 .collection-preview {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 30px;
-
-  .title {
-    font-size: 28px;
-    margin-bottom: 25px;
-    cursor: pointer;
-    transition: font-size 0.5s;
-
-    &:hover {
-      color: rgb(158, 70, 158);
-      font-weight: bold;
-      font-size: 36px;
-    }
-  }
-
-  .preview {
     display: flex;
-    justify-content: space-between;
-  }
+    flex-direction: column;
+    margin-bottom: 30px;
+
+    .title {
+        font-size: 28px;
+        margin-bottom: 25px;
+        cursor: pointer;
+        transition: font-size 0.5s;
+
+        &:hover {
+            color: rgb(158, 70, 158);
+            font-weight: bold;
+            font-size: 36px;
+        }
+    }
+
+    .preview {
+        display: flex;
+        justify-content: space-between;
+    }
 }

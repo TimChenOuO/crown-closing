@@ -5,6 +5,7 @@ import { createStructuredSelector } from "reselect";
 import "./checkout-page.scss";
 
 import CheckoutItem from "../../components/checkout-item/Checkout-item";
+import StripeHeckoutButton from "../../components/stripe-checkout-button/Stripe-checkout-button";
 
 import {
     selectCartItems,
@@ -34,6 +35,12 @@ const CheckOutPage = ({ cartItems, cartTotalAmount }) => (
             <CheckoutItem key={cartItem.id} cartItem={cartItem} />
         ))}
         <div className="total">{`Total: $ ${cartTotalAmount}`}</div>
+        <div className="text-warning">
+            Use test info in stripe checkout
+            <br />
+            4242 4242 4242 4242 - Exp: 01/20 - CVV: 123
+        </div>
+        <StripeHeckoutButton price={cartTotalAmount} />
     </div>
 );
 
