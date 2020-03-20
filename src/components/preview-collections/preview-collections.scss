@@ -1,23 +1,54 @@
 .collection-preview {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+
+  .title {
+    font-size: 28px;
+    margin-bottom: 25px;
+    cursor: pointer;
+    transition: font-size 0.5s;
+
+    &:hover {
+      color: rgb(158, 70, 158);
+      font-weight: bold;
+      font-size: 36px;
+    }
+  }
+
+  .preview {
     display: flex;
-    flex-direction: column;
-    margin-bottom: 30px;
+    justify-content: space-between;
+  }
+}
 
-    .title {
-        font-size: 28px;
-        margin-bottom: 25px;
-        cursor: pointer;
-        transition: font-size 0.5s;
+.next-arrow {
+  width: 50px;
+  position: absolute;
+  top: 40%;
+  left: 100%;
+  background: transparent;
+  outline: transparent;
+  border: transparent;
+  cursor: pointer;
+}
 
-        &:hover {
-            color: rgb(158, 70, 158);
-            font-weight: bold;
-            font-size: 36px;
-        }
-    }
+.prev-arrow {
+  width: 50px;
+  position: absolute;
+  top: 40%;
+  right: 100%;
+  background: transparent;
+  outline: transparent;
+  border: transparent;
+  cursor: pointer;
+}
 
-    .preview {
-        display: flex;
-        justify-content: space-between;
-    }
+.icon {
+  width: 100%;
+  transition: 0.5s;
+  &:hover {
+    transform: translateY(5px);
+    // box-shadow: 5px 5px 6px gray;
+  }
 }

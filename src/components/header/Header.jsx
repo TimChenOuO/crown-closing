@@ -9,7 +9,6 @@ import { ReactComponent as Logo } from "../../assets/crown.svg";
 import CartIcon from "../cart-icon/Cart-icon";
 import CartDropDown from "../cart-dropdown/Cart-dropdown";
 import NavBarBtn from "../navBar-btn/NavBar-btn";
-import NavBarDropdown from "../navBar-dropdown/NavBar-dropdown";
 
 import { selectHidden } from "../../redux/cart/cart--seletor";
 import { selectCurrentUser } from "../../redux/user/user--selector";
@@ -17,7 +16,7 @@ import { selectNavBarHidden } from "../../redux/nav-bar/navbart--selector";
 
 import { auth } from "../../firebase/firebase-utils";
 
-const Header = ({ currentUser, hidden, navBarHidden }) => (
+const Header = ({ currentUser, hidden }) => (
     <div className="header">
         <NavBarBtn />
         <Link to="/" className="logo-container">
