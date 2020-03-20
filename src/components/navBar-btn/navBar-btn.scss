@@ -1,0 +1,26 @@
+.toggle-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    width: 50px;
+    background: transparent;
+    cursor: pointer;
+    border: none;
+    &:focus {
+        outline: none;
+    }
+
+    .toggle-btn__line {
+        width: 50px;
+        height: 5px;
+        background: gray;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .toggle-btn {
+        display: flex;
+    }
+}

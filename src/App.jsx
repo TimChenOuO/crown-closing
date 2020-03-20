@@ -10,13 +10,14 @@ import ShopPage from "./pages/shoppage/ShopPage";
 import SignInOutPage from "./pages/sign-in-out-page/Sign-in-out-page";
 import Header from "./components/header/Header";
 import CheckOutPage from "./pages/checkout-page/Checkout-page";
-
+import NavBarDropdown from "./components/navBar-dropdown/NavBar-dropdown";
 // firebase method´
 import { auth, createUserProfileDucoment } from "./firebase/firebase-utils";
 
 // Redux
 import { setCurrentUser } from "./redux/user/user-action.js";
 import { selectCurrentUser } from "./redux/user/user--selector";
+import { selectNavBarHidden } from "./redux/nav-bar/navbart--selector";
 
 class App extends React.Component {
     unSubscribeFromAuth = null;
@@ -50,9 +51,12 @@ class App extends React.Component {
     }
 
     render() {
+        // const { navBarHidden } = this.props;
         return (
             <div>
                 <Header />
+                <div className="spacing" />
+                <NavBarDropdown />
                 <Switch>
                     <Route exact path="/" component={HomePage} />
                     <Route path="/shop" component={ShopPage} />
@@ -75,7 +79,8 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    currentUser: selectCurrentUser(state)
+    currentUser: selectCurrentUser(state),
+    navBarHidden: selectNavBarHidden(state)
 });
 
 const mapDispatchToProps = dispatch => ({

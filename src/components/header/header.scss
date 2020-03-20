@@ -1,16 +1,30 @@
 .header {
-    height: 70px;
+    height: 90px;
     width: 100%;
+    padding: 20px 5vw;
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 25px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    align-items: center;
+    z-index: 5;
+    margin: 0 auto;
+    background: white;
 
     .logo-container {
-        height: 100%;
+        height: 90%;
         width: 70px;
-        padding: 25px;
-    }
+        display: flex;
+        box-sizing: border-box;
+        align-items: center;
 
+        .logo {
+            width: 100%;
+        }
+    }
+    .spacing {
+        flex: 1;
+    }
     .options {
         width: 50%;
         height: 100%;
@@ -21,6 +35,12 @@
         .option {
             padding: 10px 15px;
             cursor: pointer;
+        }
+    }
+    @media screen and (max-width: 768px) {
+        .logo-container,
+        .option {
+            display: none;
         }
     }
 }
