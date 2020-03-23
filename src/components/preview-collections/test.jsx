@@ -9,17 +9,17 @@ import "slick-carousel/slick/slick-theme.css";
 import CollectionItem from "../collection-item/Collection-item";
 
 // -----------arrow component config for react-slick-------
-import { ReactComponent as NextIcon } from "./next.svg";
-import { ReactComponent as PrevIcon } from "./back.svg";
+// import { ReactComponent as NextIcon } from "./next.svg";
+// import { ReactComponent as PrevIcon } from "./back.svg";
 
 const NextArrow = ({ onClick }) => (
     <button onClick={onClick} className="next-arrow">
-        <NextIcon className="icon" />
+        &#10095;
     </button>
 );
 const PrevArrow = ({ onClick }) => (
     <button onClick={onClick} className="prev-arrow">
-        <PrevIcon className="icon" />
+        &#10094;
     </button>
 );
 
@@ -33,7 +33,16 @@ const Test = ({ title, items, routeName, match, history }) => {
         slidesToShow: 4,
         slidesToScroll: 4,
         prevArrow: <PrevArrow />,
-        nextArrow: <NextArrow />
+        nextArrow: <NextArrow />,
+        responsive: [
+            {
+                breakpoint: 768, //max-width
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+        ]
     };
     return (
         <div className="collection-preview">

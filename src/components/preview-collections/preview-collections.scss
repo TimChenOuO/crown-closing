@@ -22,33 +22,26 @@
   }
 }
 
-.next-arrow {
-  width: 50px;
-  position: absolute;
-  top: 40%;
-  left: 100%;
-  background: transparent;
-  outline: transparent;
-  border: transparent;
-  cursor: pointer;
-}
-
+.next-arrow,
 .prev-arrow {
-  width: 50px;
   position: absolute;
   top: 40%;
-  right: 100%;
   background: transparent;
   outline: transparent;
   border: transparent;
   cursor: pointer;
-}
-
-.icon {
-  width: 100%;
+  font-size: 3rem;
+  color: gray;
   transition: 0.5s;
   &:hover {
     transform: translateY(5px);
+    text-shadow: black 3px 4px 5px;
     // box-shadow: 5px 5px 6px gray;
   }
+}
+.next-arrow {
+  left: 100%;
+}
+.prev-arrow {
+  right: 100%;
 }

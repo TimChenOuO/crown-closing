@@ -17,6 +17,9 @@ const NavBarDropdown = ({
     navBarHiddenFromState
 }) => (
     <div className={`${navBarHiddenFromState ? "" : "open"} navbar-dropdown`}>
+        <Link to="/" className="option" onClick={navBarHidden}>
+            Home
+        </Link>
         <Link to="/shop" className="option" onClick={navBarHidden}>
             SHOP
         </Link>
