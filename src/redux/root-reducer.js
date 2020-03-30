@@ -11,8 +11,8 @@ import navBarReducer from "./nav-bar/navbar-reducer";
 const persistConfig = {
     key: "root",
     storage,
-    whiteList: ["cart"]
-    // blacklist: ["shop"]
+    whiteList: ["cart"],
+    blacklist: ["shop"]
 };
 
 const rootReducer = combineReducers({

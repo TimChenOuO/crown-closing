@@ -9,7 +9,7 @@ export const selectCollections = createSelector(
 
 export const selectCollectionsForPreview = createSelector(
     [selectCollections],
-    collections => Object.values(collections)
+    collections => Object.values(collections) // Object.values() will return array
 );
 
 export const selectCollection = collectionMatchParam =>

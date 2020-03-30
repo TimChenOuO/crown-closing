@@ -1,6 +1,7 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom"; //add Redirect to prevent customer still can access sign-page when they have been sign in
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
 import "./App.css";
 
@@ -12,24 +13,30 @@ import Header from "./components/header/Header";
 import CheckOutPage from "./pages/checkout-page/Checkout-page";
 import NavBarDropdown from "./components/navBar-dropdown/NavBar-dropdown";
 // firebase method´
-import { auth, createUserProfileDucoment } from "./firebase/firebase-utils";
+import {
+    auth,
+    createUserProfileDucoment
+    // addCollectionsToFirebase
+} from "./firebase/firebase-utils";
 
 // Redux
 import { setCurrentUser } from "./redux/user/user-action.js";
 import { selectCurrentUser } from "./redux/user/user--selector";
 import { selectNavBarHidden } from "./redux/nav-bar/navbart--selector";
+// import { selectCollectionsForPreview } from "./redux/shop/shop--selector";
 
 class App extends React.Component {
     unSubscribeFromAuth = null;
 
     componentDidMount() {
-        const { setCurrentUser } = this.props;
+        const { setCurrentUser /*collectionsArry*/ } = this.props;
         this.unSubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-            // only display name, email, uid will be use in user obj that google auth provied
-            // auth.onAuthStateChanged(async user){
-            // createUserProfileDucoment(user);
-            // console.log(user);
-            // }
+            /*only display name, email, uid will be use in user obj that google auth provied
+            auth.onAuthStateChanged(async user){
+            createUserProfileDucoment(user);
+            console.log(user);
+            }*/
+
             if (userAuth) {
                 const userRef = await createUserProfileDucoment(userAuth);
                 userRef.onSnapshot(snapShop => {
@@ -43,6 +50,10 @@ class App extends React.Component {
                 // userAuth is an obj from auth that provided
                 setCurrentUser(userAuth);
             }
+            /*addCollectionsToFirebase(
+                "collections",
+                collectionsArry.map(({ title, items }) => ({ title, items }))
+            );*/
         });
     }
 
@@ -78,9 +89,10 @@ class App extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({
-    currentUser: selectCurrentUser(state),
-    navBarHidden: selectNavBarHidden(state)
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser,
+    navBarHidden: selectNavBarHidden
+    // collectionsArry: selectCollectionsForPreview
 });
 
 const mapDispatchToProps = dispatch => ({

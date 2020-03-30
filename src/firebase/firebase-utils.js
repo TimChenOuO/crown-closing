@@ -23,7 +23,7 @@ export const firestore = firebase.firestore();
 // pull authentication of data into firebase of Database Method---------
 export const createUserProfileDucoment = async (authUser, additionalData) => {
     if (!authUser) return;
-    const userRef = await firestore.doc(`users/${authUser.uid}`);
+    const userRef = firestore.doc(`users/${authUser.uid}`);
     const userSnapShop = await userRef.get();
     // console.log(userSnapShop);
 
@@ -43,6 +43,41 @@ export const createUserProfileDucoment = async (authUser, additionalData) => {
         }
     }
     return userRef;
+};
+
+export const convertCollectionsToObj = collectionsOfSnapShot => {
+    const transformedCollections = collectionsOfSnapShot.docs.map(doc => {
+        const { title, items } = doc.data();
+        return {
+            routeName: encodeURI(title.toLowerCase()),
+            id: doc.id,
+            title,
+            items
+        };
+    });
+    // console.log(transformedCollections);
+    return transformedCollections.reduce((accumulator, CurrentCollection) => {
+        accumulator[CurrentCollection.title.toLowerCase()] = CurrentCollection;
+        return accumulator;
+    }, {});
+};
+
+// push shop data to firebase of database
+export const addCollectionsToFirebase = async (
+    collectionsKey,
+    objectsToAdd
+) => {
+    const collectionRef = firestore.collection(collectionsKey);
+    // console.log(collectionRef);
+    // batch make sure that if data transifer fail in the middle of process then "hole transifer will fail !" not have transifered half data
+    const batch = firestore.batch();
+
+    objectsToAdd.forEach(obj => {
+        //.doc() is in collectionRef path, call firestore to give the unique ID or YouDefind for each obj
+        const newDocFef = collectionRef.doc();
+        batch.set(newDocFef, obj);
+    });
+    return await batch.commit();
 };
 
 // below code is what you config with google auth-----------
