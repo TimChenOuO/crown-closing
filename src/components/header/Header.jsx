@@ -14,9 +14,9 @@ import { selectHidden } from "../../redux/cart/cart--seletor";
 import { selectCurrentUser } from "../../redux/user/user--selector";
 import { selectNavBarHidden } from "../../redux/nav-bar/navbart--selector";
 
-import { auth } from "../../firebase/firebase-utils";
+import { signOutStart } from "../../redux/user/user-action";
 
-const Header = ({ currentUser, hidden }) => (
+const Header = ({ currentUser, hidden, signOutStart }) => (
     <div className="header">
         <NavBarBtn />
         <Link to="/" className="logo-container">
@@ -31,7 +31,7 @@ const Header = ({ currentUser, hidden }) => (
                 CONTACT
             </Link>
             {currentUser ? (
-                <div className="option" onClick={() => auth.signOut()}>
+                <div className="option" onClick={signOutStart}>
                     Sign Out
                 </div>
             ) : (
@@ -48,7 +48,11 @@ const Header = ({ currentUser, hidden }) => (
 const mapStateToProps = createStructuredSelector({
     currentUser: selectCurrentUser,
     hidden: selectHidden,
-    navBarHidden: selectNavBarHidden
+    navBarHidden: selectNavBarHidden,
 });
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = (dispatch) => ({
+    signOutStart: () => dispatch(signOutStart()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

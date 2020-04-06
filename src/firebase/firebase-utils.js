@@ -82,9 +82,18 @@ export const addCollectionsToFirebase = async (
 
 // below code is what you config with google auth-----------
 
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt: "select_account" });
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: "select_account" });
+// export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
 
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+// ----------------------------
+export const getCurrentUser = () => {
+    return new Promise((resolve, reject) => {
+        const unsubscribe = auth.onAuthStateChanged(userAuth => {
+            unsubscribe();
+            resolve(userAuth);
+        }, reject);
+    });
+};
 
 export default firebase;
